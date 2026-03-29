@@ -9,10 +9,16 @@ import SwiftUI
 
 @main
 struct RazeApp: App {
+    @StateObject private var coordinator = AppCoordinator()
 
     var body: some Scene {
         WindowGroup {
-            SplashView()
+            NavigationStack(path: $coordinator.path) {
+                SplashView(coordinator: coordinator)
+                    .navigationDestination(for: AppRoute.self) { route in
+                        coordinator.build(route)
+                    }
+            }
         }
     }
 }

@@ -64,3 +64,12 @@ extension View {
         modifier(FontMapperStyleModifier(style: style))
     }
 }
+
+extension Text {
+    func appTextStyle(_ style: FontMapper.TextStyle) -> Text {
+        self
+            .font(style.font)
+            .foregroundColor(style.color)
+            .kerning(style.tracking)
+    }
+}
