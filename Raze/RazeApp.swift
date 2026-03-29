@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct RazeApp: App {
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }
