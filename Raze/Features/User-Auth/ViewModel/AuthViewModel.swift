@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 internal import Combine
 
 final class AuthViewModel: ObservableObject {
@@ -24,12 +25,18 @@ final class AuthViewModel: ObservableObject {
         let heading: String
         let placeholder: String
         let isSecure: Bool
+        let keyboardType: UIKeyboardType
+        let textContentType: UITextContentType?
+        let autocapitalization: TextInputAutocapitalization
+        let disableAutocorrection: Bool
 
         var id: AuthField { field }
     }
 
     @Published var authDataModel: AuthDataModel
 
+    var errorMessage : String?
+    
     var trailingHeadingText: String {
         switch authType {
         case .logIn:
@@ -65,13 +72,21 @@ final class AuthViewModel: ObservableObject {
                     field: .deploymentID,
                     heading: "Deployment ID",
                     placeholder: "EMAIL_ADDRESS",
-                    isSecure: false
+                    isSecure: false,
+                    keyboardType: .emailAddress,
+                    textContentType: .username,
+                    autocapitalization: .never,
+                    disableAutocorrection: true
                 ),
                 FieldConfiguration(
                     field: .accessKey,
                     heading: "Access Key",
                     placeholder: "••••••••",
-                    isSecure: true
+                    isSecure: true,
+                    keyboardType: .default,
+                    textContentType: .password,
+                    autocapitalization: .never,
+                    disableAutocorrection: true
                 )
             ]
         case .signUp:
@@ -80,19 +95,31 @@ final class AuthViewModel: ObservableObject {
                     field: .fullName,
                     heading: "Full Name",
                     placeholder: "ENTER NAME",
-                    isSecure: false
+                    isSecure: false,
+                    keyboardType: .default,
+                    textContentType: .name,
+                    autocapitalization: .words,
+                    disableAutocorrection: true
                 ),
                 FieldConfiguration(
                     field: .emailAddress,
                     heading: "Email Address",
                     placeholder: "USER@NETWORK.RAZE",
-                    isSecure: false
+                    isSecure: false,
+                    keyboardType: .emailAddress,
+                    textContentType: .emailAddress,
+                    autocapitalization: .never,
+                    disableAutocorrection: true
                 ),
                 FieldConfiguration(
                     field: .accessKey,
                     heading: "Access Key",
                     placeholder: "••••••••",
-                    isSecure: true
+                    isSecure: true,
+                    keyboardType: .default,
+                    textContentType: .newPassword,
+                    autocapitalization: .never,
+                    disableAutocorrection: true
                 )
             ]
         }
@@ -136,5 +163,15 @@ final class AuthViewModel: ObservableObject {
                 }
             }
         )
+    }
+    
+    func checkEmailRegex(userName : String , password : String){
+        
+        guard !userName.trimmingCharacters(in: .whitespaces).isEmpty,
+              !password.isEmpty else {
+            errorMessage = "Please enter both username and password."
+            return
+        }
+        
     }
 }

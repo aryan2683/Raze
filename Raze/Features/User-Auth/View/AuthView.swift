@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AuthView: View {
-    @StateObject var authViewModel: AuthViewModel
+    @ObservedObject var authViewModel: AuthViewModel
  
     var body: some View {
         ZStack {
@@ -20,6 +20,9 @@ struct AuthView: View {
                 )
 
                 AuthForm()
+                
+                AuthCTA()
+                
             }
             .padding(.horizontal,20)
             .padding(.vertical,24)

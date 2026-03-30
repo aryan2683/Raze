@@ -4,8 +4,8 @@ import SwiftUI
 enum AppColor: String, CaseIterable,ShapeStyle {
     case tertiary = "FF0055"
     case secondary = "1A1A1A"
-    case primary = "00F0FF"
-    case nuetral = "080808"
+    case primary = "00F0FF" //sean
+    case nuetral = "080808" //black
     case white = "FFFFFF"
 
     var color: Color {

@@ -18,7 +18,11 @@ struct AuthForm: View {
                     text: authViewModel.binding(for: configuration.field),
                     fieldHeading: configuration.heading,
                     placeholder: configuration.placeholder,
-                    isSecure: configuration.isSecure
+                    isSecure: configuration.isSecure,
+                    keyboardType: configuration.keyboardType,
+                    textContentType: configuration.textContentType,
+                    autocapitalization: configuration.autocapitalization,
+                    disableAutocorrection: configuration.disableAutocorrection
                 )
             }
         }
@@ -30,6 +34,10 @@ struct AuthTextFields: View {
     var fieldHeading: String = ""
     var placeholder: String = ""
     var isSecure: Bool = false
+    var keyboardType: UIKeyboardType = .default
+    var textContentType: UITextContentType?
+    var autocapitalization: TextInputAutocapitalization = .never
+    var disableAutocorrection: Bool = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -46,7 +54,11 @@ struct AuthTextFields: View {
             AppTextField(
                 placeholder: placeholder,
                 text: $text,
-                isSecure: isSecure
+                isSecure: isSecure,
+                keyboardType: keyboardType,
+                textContentType: textContentType,
+                autocapitalization: autocapitalization,
+                disableAutocorrection: disableAutocorrection
             )
         }
     }
