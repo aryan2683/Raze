@@ -22,8 +22,8 @@ struct NavHeaderView: View {
             .buttonStyle(.plain)
         }
         .frame(maxWidth: .infinity)
-        .padding(.horizontal, 40)
-        .padding(.top, 10)
+        .padding(.top, 6)
+        .padding(.horizontal , 10)
         .padding(.bottom, 6)
     }
 }

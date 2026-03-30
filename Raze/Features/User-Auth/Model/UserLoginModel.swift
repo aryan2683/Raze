@@ -8,6 +8,8 @@
 import Foundation
 
 struct AuthDataModel {
-    
-    
+    var fullName: String = ""
+    var emailAddress: String = ""
+    var deploymentID: String = ""
+    var accessKey: String = ""
 }

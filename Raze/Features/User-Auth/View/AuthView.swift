@@ -10,40 +10,27 @@ import SwiftUI
 
 struct AuthView: View {
     @StateObject var authViewModel: AuthViewModel
-
-    private let leadingHeadingStyle = FontMapper.textStyle(
-        family: .manrope,
-        .extraBold,
-        size: .f36,
-        color: .white
-    )
-
-    private let trailingHeadingStyle = FontMapper.textStyle(
-        family: .manrope,
-        .extraBold,
-        size: .f36,
-        color: .primary
-    )
-
+ 
     var body: some View {
         ZStack {
-            VStack(alignment : .leading,spacing : 2){
-                
-                Text(authViewModel.headingText)
-                    .appTextStyle(leadingHeadingStyle)
-                
-                 Text(authViewModel.trailingHeadingText)
-                    .appTextStyle(trailingHeadingStyle)
-                
-                Text("Authorize biometric or credential acces ")
-                    .appTextStyle(FontMapper.textStyle(family : .spaceGrotesk,.regular,size : .f14 , color : .nuetral))
-                    .multilineTextAlignment(.leading)
+            VStack(alignment: .leading,spacing : 16) {
+                AuthHeading(heading: authViewModel.headingText ,
+                            trailingHeading: authViewModel.trailingHeadingText ,
+                            subheading: authViewModel.subheading
+                )
+
+                AuthForm()
             }
-            .padding(.horizontal,10)
-            .padding(.vertical,10)
-            .background(AppColor.tertiary)
+            .padding(.horizontal,20)
+            .padding(.vertical,24)
+            .background(AppColor.nuetral)
+            .environmentObject(authViewModel)
         }
         .background(.black)
+        .frame(maxWidth: .infinity , maxHeight: .infinity)
+        .padding(.horizontal,20)
+        .padding(.vertical,24)
+        .toolbar(.hidden , for : .navigationBar)
         .safeAreaInset(edge: .top, spacing: 0) {
             NavHeaderView(
                 title: AppStrings.appName,
